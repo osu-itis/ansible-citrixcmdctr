@@ -1,0 +1,9 @@
+---
+- name: copy Command Center installer
+  copy: src="{{ cmdctr_installation.installer_path }}/{{ cmdctr_installation.installer_filename }}"
+        dest="{{ cmdctr_installation.installer_temp_path }}/{{ cmdctr_installation.installer_filename }}"
+        mode=700
+
+#- name: Install Command Center
+
+#- name: Remove Command Center installer

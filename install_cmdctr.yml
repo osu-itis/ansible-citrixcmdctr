@@ -1,0 +1,6 @@
+- name: install Citrix Command Center
+  hosts: all
+  remote_user: root
+
+  roles:
+    - install
