@@ -1,9 +1,30 @@
 ---
+- name: install packages
+  yum: name={{item}} state=present update_cache=yes
+  with_items:
+    - expect
+
 - name: copy Command Center installer
   copy: src="{{ cmdctr_installation.installer_path }}/{{ cmdctr_installation.installer_filename }}"
         dest="{{ cmdctr_installation.installer_temp_path }}/{{ cmdctr_installation.installer_filename }}"
         mode=700
 
-#- name: Install Command Center
+- name: configure iptables
+  script: iptables.sh
 
-#- name: Remove Command Center installer
+- name: prepare expect script
+  template: src=install_script.expect.j2
+            dest="{{ cmdctr_installation.installer_temp_path }}/install_script.expect"
+            owner=root
+            group=root
+
+- name: install Command Center
+  command: "/usr/bin/expect {{ cmdctr_installation.installer_temp_path }}/install_script.expect"
+
+- name: cleanup packages
+  yum: name={{item}} state=absent
+  with_items:
+    - expect
+
+- name: cleanup expect script
+  file: path="{{ cmdctr_installation.installer_temp_path }}/install_script.expect" state=absent

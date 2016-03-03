@@ -1,0 +1,98 @@
+#!/usr/bin/expect -f
+
+set timeout -1
+exp_internal 1
+
+set dbhostname "{{ cmdctr_database.hostname }}"
+set dbport "{{ cmdctr_database.port }}"
+set dbname "{{ cmdctr_database.dbname }}"
+set dbusername "{{ cmdctr_database.username }}"
+set dbpassword "{{ cmdctr_database.password }}"
+
+spawn /tmp/CC_Setup64_5.2_44_11.bin -i console
+
+expect {
+    timeout { send_user "\nFailed to execute installer\n"; exit 1 }
+    "Preparing to install..." { exp_continue }
+    "Unpacking the JRE..." { exp_continue }
+    "Extracting the installation resources from the installer archive..." { exp_continue }
+    "Launching installer..." { exp_continue }
+    "Preparing CONSOLE Mode Installation..." { exp_continue }
+
+    "PRESS <ENTER> TO CONTINUE: " {
+        send "\r"
+    }
+}
+
+expect {
+    "DO YOU ACCEPT THE TERMS OF THIS LICENSE AGREEMENT? (Y/N): " {
+        send "Y\r"
+    }
+}
+
+expect {
+    "ENTER AN ABSOLUTE PATH, OR PRESS <ENTER> TO ACCEPT THE DEFAULT\r\n      : " {
+        send "\r"
+    }
+}
+
+expect {
+    "Choose Installation Type" { exp_continue }
+    "ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:: " {
+        send "2\r"
+    }
+}
+
+expect {
+    "Database Settings" { exp_continue }
+    "ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:: " {
+        send "3\r"
+    }
+}
+
+expect {
+    "Host Name* (Default: ): " {
+        send "$dbhostname\r"
+    }
+}
+expect {
+    "Port* (Default: ): " {
+        send "$dbport\r"
+    }
+}
+expect {
+    "Database Name* (Default: ): " {
+        send "$dbname\r"
+     }
+}
+expect {
+    "User Name* (Default: ): " {
+        send "$dbusername\r"
+    }
+}
+expect {
+    "Database Password : : " {
+        send "$dbpassword\r"
+    }
+}
+
+expect {
+    "Security Settings" { exp_continue }
+    "ENTER THE NUMBER FOR YOUR CHOICE, OR PRESS <ENTER> TO ACCEPT THE DEFAULT:: " {
+        send "2\r"
+    }
+}
+
+expect {
+    "Pre-Installation Summary" { exp_continue }
+    "PRESS <ENTER> TO CONTINUE: " {
+        send "\r"
+    }
+}
+
+expect {
+    "Installation Complete" { exp_continue }
+    "PRESS <ENTER> TO EXIT THE INSTALLER: " {
+        send "\r"
+    }
+}
