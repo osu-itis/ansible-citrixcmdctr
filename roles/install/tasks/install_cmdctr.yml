@@ -9,9 +9,6 @@
         dest="{{ cmdctr_installation.installer_temp_path }}/{{ cmdctr_installation.installer_filename }}"
         mode=700
 
-- name: configure iptables
-  script: iptables.sh
-
 - name: prepare expect script
   template: src=install_script.expect.j2
             dest="{{ cmdctr_installation.installer_temp_path }}/install_script.expect"

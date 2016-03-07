@@ -1,0 +1,8 @@
+---
+- name: open Command Center ports in firewalld
+  firewalld: port="{{ item }}"
+             immediate=true
+             permanent=true
+             state=enabled
+  when: firewalld_open_port is defined
+  with_items: "{{ firewalld_open_port.ports | default() }}"

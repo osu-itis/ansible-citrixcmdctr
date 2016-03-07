@@ -9,7 +9,7 @@ set dbname "{{ cmdctr_database.dbname }}"
 set dbusername "{{ cmdctr_database.username }}"
 set dbpassword "{{ cmdctr_database.password }}"
 
-spawn /tmp/CC_Setup64_5.2_44_11.bin -i console
+spawn {{ cmdctr_installation.installer_temp_path }}/{{ cmdctr_installation.installer_filename }} -i console
 
 expect {
     timeout { send_user "\nFailed to execute installer\n"; exit 1 }

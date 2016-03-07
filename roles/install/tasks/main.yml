@@ -1,2 +1,3 @@
 ---
 - include: install_cmdctr.yml
+- include: firewalld_open_cmdctrports.yml
