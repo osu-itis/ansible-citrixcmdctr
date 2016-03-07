@@ -1,5 +1,7 @@
 # ansible-citrixcmdctr
 
+[![Build Status](https://jenkins.sig.oregonstate.edu/job/lint%20ansible-citrixcmdctr/badge/icon)](https://jenkins.sig.oregonstate.edu/job/lint%20ansible-citrixcmdctr/)
+
 Ansible playbook for Citrix Command Center 5.2
 
 ## Caveats
