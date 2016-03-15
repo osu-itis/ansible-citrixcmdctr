@@ -1,1 +1,5 @@
-changeme.oregonstate.edu
+[command_center]
+cmdctrhost.someplace.edu
+
+[scripthost]
+scripthost.someplace.edu

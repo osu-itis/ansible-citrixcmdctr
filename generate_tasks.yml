@@ -1,0 +1,8 @@
+- name: generate tasks for Command Center
+  hosts: scripthost
+  remote_user: root
+  become: yes
+  become_user: scripts
+
+  roles:
+    - generate_tasks

@@ -1,0 +1,8 @@
+---
+- name: copy serviceobjects
+  copy: src="{{ taskmaster.serviceobjects_source_path }}/serviceobjects.yml"
+        dest="{{ taskmaster.scripthost_scripts_home }}/citrixcc-taskmaster"
+        mode=600
+
+- name: run citrixcc-taskmaster
+  script: run_citrixcc-taskmaster.sh
